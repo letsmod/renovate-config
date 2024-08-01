@@ -1,2 +1,5 @@
 # renovate-config
-Shared configuration for Renovate bot @letsmod
+
+Renovate bot configuration preset @LetsMOD
+
+Please see [official documentation](https://docs.renovatebot.com/config-presets/) for details.
