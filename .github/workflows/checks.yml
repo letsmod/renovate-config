@@ -45,6 +45,7 @@ jobs:
 
   super-linter:
     name: Super-Linter
+    if: github.actor != 'renovate[bot]' # skip for Renovate PRs
     runs-on: ubuntu-latest
 
     steps:
