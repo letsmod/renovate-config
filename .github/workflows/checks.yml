@@ -27,6 +27,5 @@ jobs:
       - name: Check files with Super-Linter
         uses: super-linter/super-linter/slim@v7
         env:
-          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'workflow_dispatch' }}
