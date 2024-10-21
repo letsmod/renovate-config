@@ -1,5 +1,8 @@
 # See CODEOWNERS documentation:
 # https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-# All other PRs should be reviewed by the DevOps team
-* @LetsMOD/DevOps
+# All PRs should be reviewed by at least one team member
+* @skolobov @letsmod-alex
+
+# Anything GitHub-related should be reviewed by the DevOps team
+.github/ @skolobov @letsmod-alex
