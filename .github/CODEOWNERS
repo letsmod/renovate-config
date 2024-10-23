@@ -1,5 +1,5 @@
-# See CODEOWNERS documentation:
-# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+# Code Owner Rules
+# https://github.com/letsmod/docs/wiki/Code-Owner-Rules
 
 # All PRs should be reviewed by at least one team member
 * @skolobov @letsmod-alex
