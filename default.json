@@ -2,5 +2,12 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended", "schedule:weekends"],
   "labels": ["dependencies"],
-  "semanticCommits": "enabled"
+  "semanticCommits": "enabled",
+  "packageRules": [
+    {
+      "description": "boto3 and botocore release together, and an exact pin of one needs the matching other, so update them in one PR instead of two that must be merged in order (INFRA-614).",
+      "matchPackageNames": ["boto3", "botocore"],
+      "groupName": "boto3 and botocore"
+    }
+  ]
 }
