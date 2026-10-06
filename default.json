@@ -1,6 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended", "schedule:weekends"],
+  "rebaseWhen": "conflicted",
+  "updateNotScheduled": false,
   "labels": ["dependencies"],
   "semanticCommits": "enabled",
   "packageRules": [
