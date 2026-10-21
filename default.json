@@ -5,6 +5,15 @@
   "updateNotScheduled": false,
   "labels": ["dependencies"],
   "semanticCommits": "enabled",
+  "npmrc": "@letsmod:registry=https://npm.pkg.github.com",
+  "npmrcMerge": true,
+  "hostRules": [
+    {
+      "matchHost": "npm.pkg.github.com",
+      "hostType": "npm",
+      "token": "{{ secrets.LETSMOD_GH_PACKAGES_TOKEN }}"
+    }
+  ],
   "packageRules": [
     {
       "description": "boto3 and botocore release together, and an exact pin of one needs the matching other, so update them in one PR instead of two that must be merged in order (INFRA-614).",
