@@ -19,6 +19,11 @@
       "description": "boto3 and botocore release together, and an exact pin of one needs the matching other, so update them in one PR instead of two that must be merged in order (INFRA-614).",
       "matchPackageNames": ["boto3", "botocore"],
       "groupName": "boto3 and botocore"
+    },
+    {
+      "description": "The @letsmod/dcl-* packages are released together from the dcl-kit monorepo with one shared version, so update them in one PR per repository instead of one per package.",
+      "matchPackageNames": ["@letsmod/dcl-*"],
+      "groupName": "dcl-kit"
     }
   ]
 }
