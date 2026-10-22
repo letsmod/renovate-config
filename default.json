@@ -26,6 +26,11 @@
       "groupName": "dcl-kit"
     },
     {
+      "description": "Offer Python patch updates on their own branch, so holding a new minor version for approval (next rule) doesn't hold back patch releases. Must not match on update type: Renovate decides the split before the update type is known.",
+      "matchDepNames": ["python"],
+      "separateMinorPatch": true
+    },
+    {
       "description": "A new Python minor version often lands before the libraries and tools a repository depends on support it, so hold it on the Dependency Dashboard until someone approves it there. Patch updates are not affected.",
       "matchDepNames": ["python"],
       "matchUpdateTypes": ["minor"],
