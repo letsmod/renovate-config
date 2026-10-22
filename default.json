@@ -24,6 +24,12 @@
       "description": "The @letsmod/dcl-* packages are released together from the dcl-kit monorepo with one shared version, so update them in one PR per repository instead of one per package.",
       "matchPackageNames": ["@letsmod/dcl-*"],
       "groupName": "dcl-kit"
+    },
+    {
+      "description": "A new Python minor version often lands before the libraries and tools a repository depends on support it, so hold it on the Dependency Dashboard until someone approves it there. Patch updates are not affected.",
+      "matchDepNames": ["python"],
+      "matchUpdateTypes": ["minor"],
+      "dependencyDashboardApproval": true
     }
   ]
 }
