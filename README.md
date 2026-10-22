@@ -11,7 +11,9 @@ Please see [official documentation](https://docs.renovatebot.com/config-presets/
   - Renovate rebases a PR only when it has a merge conflict, and only touches branches inside the schedule.
   - By default it rebases every open PR whenever the base branch moves, and each rebase re-runs the PR workflows: in agents that cost about 600 billed Actions minutes on 2026-10-02 alone (INFRA-578/579).
   - In repositories whose branch protection requires up-to-date branches, a Renovate PR may need one "Update branch" click before merging.
-- **Python minor versions:** an update to a new Python minor version (for example 3.14 → 3.15) waits under "Pending Approval" on the repository's Dependency Dashboard. Tick its box there when the repository is ready, and Renovate opens the PR. Patch updates (3.14.5 → 3.14.6) arrive as usual, in their own PR (`separateMinorPatch`): without that split, Renovate would offer only the newest version as one minor update, and holding it would hold the patches too.
+- **Python minor versions:** an update to a new Python minor version (for example 3.14 → 3.15) waits under "Pending Approval" on the repository's Dependency Dashboard.
+  - Tick its box there when the repository is ready, and Renovate opens the PR.
+  - Patch updates (3.14.5 → 3.14.6) arrive as usual, in their own PR (`separateMinorPatch`). Without that split, Renovate would offer only the newest version as one minor update, and holding it would hold the patches too.
 
 ## Private `@letsmod` npm packages
 
