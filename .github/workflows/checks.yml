@@ -6,16 +6,16 @@ on:
   # It should also be possible to run all checks manually
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pull-requests: write
-  statuses: write
+permissions: {}
 
 jobs:
   pr-title:
     name: PR title
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    permissions:
+      # Comment on the PR when its title fails the check
+      pull-requests: write
 
     steps:
       - name: Validate PR title
@@ -48,6 +48,12 @@ jobs:
     name: Super-Linter
     if: github.actor != 'renovate[bot]' # skip for Renovate PRs
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # Post the summary comment on the PR
+      pull-requests: write
+      # Report a commit status per linter
+      statuses: write
 
     steps:
       - name: Checkout Code
@@ -56,9 +62,13 @@ jobs:
           # Full git history is needed to get a proper
           # list of changed files within `super-linter`
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Check files with Super-Linter
         uses: super-linter/super-linter/slim@v9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'workflow_dispatch' }}
+          # Validate the preset with renovate-config-validator, which otherwise
+          # only checks the standard repo config file names (renovate.json etc.)
+          RENOVATE_SHAREABLE_CONFIG_PRESET_FILE_NAMES: default.json
