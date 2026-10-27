@@ -19,14 +19,14 @@ jobs:
 
     steps:
       - name: Validate PR title
-        uses: amannn/action-semantic-pull-request@48f256284bd46cdaab1048c3721360e808335d50 # v6.1.1
+        uses: amannn/action-semantic-pull-request@v6
         id: pr_title_check
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add a comment if PR title check fails
         if: always() && (steps.pr_title_check.outputs.error_message != null)
-        uses: marocchino/sticky-pull-request-comment@5770ad5eb8f42dd2c4f34da00c94c5381e49af88 # v3.0.5
+        uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: pr-title-check-error
           message: |
@@ -39,7 +39,7 @@ jobs:
 
       - name: Remove the comment if the issue has been resolved
         if: ${{ steps.pr_title_check.outputs.error_message == null }}
-        uses: marocchino/sticky-pull-request-comment@5770ad5eb8f42dd2c4f34da00c94c5381e49af88 # v3.0.5
+        uses: marocchino/sticky-pull-request-comment@v3
         with:
           header: pr-title-check-error
           delete: true
@@ -57,7 +57,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v7
         with:
           # Full git history is needed to get a proper
           # list of changed files within `super-linter`
@@ -65,7 +65,7 @@ jobs:
           persist-credentials: false
 
       - name: Check files with Super-Linter
-        uses: super-linter/super-linter/slim@2da136927bd4a73596db63044b504547c62cb854 # v9.0.0
+        uses: super-linter/super-linter/slim@v9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'workflow_dispatch' }}

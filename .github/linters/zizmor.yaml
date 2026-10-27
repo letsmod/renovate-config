@@ -1,0 +1,7 @@
+# LetsMOD repos reference actions by tag (e.g. actions/checkout@v7), not by
+# commit hash: allow that instead of zizmor's default hash-pin requirement.
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        "*": ref-pin
