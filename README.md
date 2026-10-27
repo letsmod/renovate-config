@@ -16,7 +16,7 @@ Please see [official documentation](https://docs.renovatebot.com/config-presets/
   - Patch updates (3.14.5 → 3.14.6) arrive as usual, in their own PR (`separateMinorPatch`). Without that split, Renovate would offer only the newest version as one minor update, and holding it would hold the patches too.
 - **Security updates:** Renovate opens them from the repository's Dependabot alerts, right away instead of on the schedule, with an extra `security` label.
   - Dependabot alerts stay on in every repository, but Dependabot's own security update PRs are off org-wide, so the two bots don't open a PR for the same fix (INFRA-791). Both settings live in `infrastructure/common/github/repositories.tf`.
-- **Lock file maintenance:** once a week, on the weekend, Renovate opens one PR per repository that regenerates its lock files (`package-lock.json`, `uv.lock` and others).
+- **Lockfile maintenance:** once a week, on the weekend, Renovate opens one PR per repository that regenerates its lockfiles (`package-lock.json`, `uv.lock` and others).
   - This is what brings in fixed versions of indirect dependencies (packages pulled in by other packages), which security update PRs don't touch.
   - The weekend schedule is set again under `lockFileMaintenance`, because its built-in default (early Monday) would override the global one.
 
