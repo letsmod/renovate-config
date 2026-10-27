@@ -4,6 +4,13 @@
   "rebaseWhen": "conflicted",
   "updateNotScheduled": false,
   "labels": ["dependencies"],
+  "vulnerabilityAlerts": {
+    "addLabels": ["security"]
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["* * * * 0,6"]
+  },
   "semanticCommits": "enabled",
   "npmrc": "@letsmod:registry=https://npm.pkg.github.com",
   "npmrcMerge": true,
