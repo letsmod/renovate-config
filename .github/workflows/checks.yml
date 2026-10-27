@@ -62,3 +62,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'workflow_dispatch' }}
+          # Validate the preset with renovate-config-validator, which otherwise
+          # only checks the standard repo config file names (renovate.json etc.)
+          RENOVATE_SHAREABLE_CONFIG_PRESET_FILE_NAMES: default.json
