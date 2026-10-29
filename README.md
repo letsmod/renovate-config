@@ -27,6 +27,7 @@ The `@letsmod/*` packages (dcl-kit: `dcl-core`, `dcl-linter`, `dcl-runtime`, `dc
 - **Registry:** `npmrc` maps the `@letsmod` scope to `https://npm.pkg.github.com`. `npmrcMerge: true` adds it to a repository's own `.npmrc` instead of replacing it.
 - **Credential:** the `npm.pkg.github.com` host rule uses the org-level Mend secret `LETSMOD_GH_PACKAGES_TOKEN`: a classic personal access token with only `read:packages`, owned by the `letsmod-packages-reader` machine account. The Mend app's own token is not accepted by the GitHub Packages npm registry.
 - **Package access:** a package inherits access from the repository that publishes it, so the account can read only the repositories granted in `infrastructure/common/github/machine-users.tf` (`dcl-kit`, `pimcore-link`). A new private package needs its repository added there first.
+- **Range updates:** dcl-kit updates use `rangeStrategy: "bump"`, so a release that the current range already allows (`^0.6.6` → 0.6.7) still moves the range in `package.json` (to `^0.6.7`) instead of updating only `package-lock.json`. The manifest then shows the minimum dcl-kit version the repository needs (INFRA-808).
 - **Where the secret lives:** [developer.mend.io](https://developer.mend.io) → `letsmod` → Settings → Credentials. Rotate it there before the token expires; no config change is needed.
 
 Without this, Renovate reports `Failed to look up npm package @letsmod/...` on the Dependency Dashboard and cannot regenerate `package-lock.json` for updates that change `package.json` (INFRA-669).
