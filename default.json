@@ -28,9 +28,10 @@
       "groupName": "boto3 and botocore"
     },
     {
-      "description": "The @letsmod/dcl-* packages are released together from the dcl-kit monorepo with one shared version, so update them in one PR per repository instead of one per package.",
+      "description": "The @letsmod/dcl-* packages are released together from the dcl-kit monorepo with one shared version, so update them in one PR per repository instead of one per package. Bump the package.json range on every release, even one the current range already allows, so the manifest states the minimum dcl-kit version a repository needs (INFRA-808).",
       "matchPackageNames": ["@letsmod/dcl-*"],
-      "groupName": "dcl-kit"
+      "groupName": "dcl-kit",
+      "rangeStrategy": "bump"
     },
     {
       "description": "Offer Python patch updates on their own branch, so holding a new minor version for approval (next rule) doesn't hold back patch releases. Must not match on update type: Renovate decides the split before the update type is known.",
