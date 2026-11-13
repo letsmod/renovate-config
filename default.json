@@ -34,6 +34,12 @@
       "rangeStrategy": "bump"
     },
     {
+      "description": "Our own npm packages (dcl-kit, pimcore-link) have only our repositories as consumers, so run their updates at any time instead of waiting for the weekend, and open them ahead of other updates when PR limits apply, so a release reaches its consumers within hours (INFRA-965).",
+      "matchPackageNames": ["@letsmod/**"],
+      "schedule": ["at any time"],
+      "prPriority": 5
+    },
+    {
       "description": "Repositories pin exact ci-pipelines release tags and adopt each release through this update, so run it at any time instead of waiting for the weekend, and open it ahead of other updates when PR limits apply (INFRA-959).",
       "matchDepNames": ["letsmod/ci-pipelines"],
       "schedule": ["at any time"],
