@@ -34,6 +34,12 @@
       "rangeStrategy": "bump"
     },
     {
+      "description": "Repositories pin exact ci-pipelines release tags and adopt each release through this update, so run it at any time instead of waiting for the weekend, and open it ahead of other updates when PR limits apply (INFRA-959).",
+      "matchDepNames": ["letsmod/ci-pipelines"],
+      "schedule": ["at any time"],
+      "prPriority": 5
+    },
+    {
       "description": "Offer Python patch updates on their own branch, so holding a new minor version for approval (next rule) doesn't hold back patch releases. Must not match on update type: Renovate decides the split before the update type is known.",
       "matchDepNames": ["python"],
       "separateMinorPatch": true
