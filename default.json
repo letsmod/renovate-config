@@ -28,10 +28,15 @@
       "groupName": "boto3 and botocore"
     },
     {
-      "description": "The @letsmod/dcl-* packages are released together from the dcl-kit monorepo with one shared version, so update them in one PR per repository instead of one per package. Bump the package.json range on every release, even one the current range already allows, so the manifest states the minimum dcl-kit version a repository needs (INFRA-808).",
+      "description": "The @letsmod/dcl-* packages are released together from the dcl-kit monorepo with one shared version, so update them in one PR per repository instead of one per package (INFRA-808).",
       "matchPackageNames": ["@letsmod/dcl-*"],
-      "groupName": "dcl-kit",
-      "rangeStrategy": "bump"
+      "groupName": "dcl-kit"
+    },
+    {
+      "description": "Bump the package.json range of our own npm packages on every release, even one the current range already allows, so the manifest states the minimum version a repository needs (INFRA-808). Offer the jump from 0.x to CalVer (2026.MDD.N): Renovate skips a major increment above 500 by default, to catch accidental date-based versions (INFRA-991).",
+      "matchPackageNames": ["@letsmod/**"],
+      "rangeStrategy": "bump",
+      "maxMajorIncrement": 0
     },
     {
       "description": "Our own npm packages (dcl-kit, pimcore-link) have only our repositories as consumers, so run their updates at any time instead of waiting for the weekend, and open them ahead of other updates when PR limits apply, so a release reaches its consumers within hours (INFRA-965).",
