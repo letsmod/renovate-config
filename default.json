@@ -29,6 +29,7 @@
     },
     {
       "description": "The Vercel AI SDK packages (ai and its @ai-sdk/* providers) release together from one monorepo, so update them in one PR per repository instead of one per package (INFRA-999). Major updates still come in a separate PR from minor and patch ones.",
+      "matchDatasources": ["npm"],
       "matchPackageNames": ["ai", "@ai-sdk/**"],
       "groupName": "Vercel AI SDK"
     },
