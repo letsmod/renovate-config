@@ -14,6 +14,11 @@ Please see [official documentation](https://docs.renovatebot.com/config-presets/
 - **Python minor versions:** an update to a new Python minor version (for example 3.14 → 3.15) waits under "Pending Approval" on the repository's Dependency Dashboard.
   - Tick its box there when the repository is ready, and Renovate opens the PR.
   - Patch updates (3.14.5 → 3.14.6) arrive as usual, in their own PR (`separateMinorPatch`). Without that split, Renovate would offer only the newest version as one minor update, and holding it would hold the patches too.
+- **Grouped packages:** each of these families releases together, so it arrives as one PR per repository instead of one per package.
+  - `boto3` and `botocore` (INFRA-614).
+  - dcl-kit: `@letsmod/dcl-*` (INFRA-808).
+  - Vercel AI SDK: npm `ai` and `@ai-sdk/*` (INFRA-999). In seraph these four packages used to open four PRs every weekend.
+  - `config:recommended` adds Renovate's built-in monorepo and recommended groups on top of these, for example `@aws-sdk/*`.
 - **`@letsmod` npm packages:** updates to `@letsmod/*` (dcl-kit, pimcore-link) also run at any time with `prPriority: 5`, so a release reaches its consumers without waiting for the weekend (INFRA-965).
 - **ci-pipelines:** updates to `letsmod/ci-pipelines` (the shared reusable workflows, pinned to exact release tags) run at any time, not only on weekends, and come first when PR limits apply (`prPriority: 5`), so a release reaches its callers within minutes (INFRA-959).
 - **Security updates:** Renovate opens them from the repository's Dependabot alerts, right away instead of on the schedule, with an extra `security` label.
