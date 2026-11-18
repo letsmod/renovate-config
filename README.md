@@ -11,6 +11,10 @@ Please see [official documentation](https://docs.renovatebot.com/config-presets/
   - Renovate rebases a PR only when it has a merge conflict, and only touches branches inside the schedule.
   - By default it rebases every open PR whenever the base branch moves, and each rebase re-runs the PR workflows: in agents that cost about 600 billed Actions minutes on 2026-10-02 alone (INFRA-578/579).
   - In repositories whose branch protection requires up-to-date branches, a Renovate PR may need one "Update branch" click before merging.
+- **Ignored paths:** `ignorePaths` lists only the folders that hold dependency files in our repositories. It replaces Renovate's built-in list (`:ignoreModulesAndTests`), whose other patterns match nothing here.
+  - `platform/**` and `workflows/**`: copies of metaform-components (3 domain repositories) and metaform-workflows (26 PATH repositories). Each release replaces them (INFRA-822), so an update there would be reverted by the next one. metaform-workflows, whose source lives in `workflows/`, sets `ignorePaths: []`.
+  - `**/vendor/**` (vendored SDKs in morpheus and seraph), `**/examples/**` (make-metaform-map) and `**/test/**`, `**/tests/**` (test requirements in agents, a test fixture in neb).
+  - A repository that sets its own `ignorePaths` replaces this list, so it must repeat the entries it still needs.
 - **Python minor versions:** an update to a new Python minor version (for example 3.14 → 3.15) waits under "Pending Approval" on the repository's Dependency Dashboard.
   - Tick its box there when the repository is ready, and Renovate opens the PR.
   - Patch updates (3.14.5 → 3.14.6) arrive as usual, in their own PR (`separateMinorPatch`). Without that split, Renovate would offer only the newest version as one minor update, and holding it would hold the patches too.
@@ -26,16 +30,6 @@ Please see [official documentation](https://docs.renovatebot.com/config-presets/
 - **Lockfile maintenance:** once a week, on the weekend, Renovate opens one PR per repository that regenerates its lockfiles (`package-lock.json`, `uv.lock` and others).
   - This is what brings in fixed versions of indirect dependencies (packages pulled in by other packages), which security update PRs don't touch.
   - The weekend schedule is set again under `lockFileMaintenance`, because its built-in default (early Monday) would override the global one.
-
-## Metaform consumers
-
-Repositories that receive metaform-components releases in `platform/` or metaform-workflows releases in `workflows/` extend `local>letsmod/renovate-config:metaform-consumer` instead of the default preset:
-
-- It is the default preset plus `ignorePaths` for `platform/**` and `workflows/**`. Each release replaces those folders (the metaform rollout, INFRA-822), so a Renovate update there would be reverted by the next one. Dependencies belong in the source repository; the dependency files at the consumer root stay covered.
-- `ignorePaths` replaces the list from Renovate's `:ignoreModulesAndTests` preset instead of adding to it, so the preset repeats those defaults (`node_modules`, `vendor`, test folders).
-  - NuGet has its own list in that preset (it keeps test folders), which takes precedence over the top-level one, so the preset sets `nuget.ignorePaths` too.
-  - A repository that sets its own `ignorePaths` replaces the preset's list: it must repeat the defaults and `platform/**` and `workflows/**`.
-- metaform-workflows itself doesn't use it: its source package lives in `workflows/`.
 
 ## Private `@letsmod` npm packages
 
