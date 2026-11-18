@@ -27,6 +27,14 @@ Please see [official documentation](https://docs.renovatebot.com/config-presets/
   - This is what brings in fixed versions of indirect dependencies (packages pulled in by other packages), which security update PRs don't touch.
   - The weekend schedule is set again under `lockFileMaintenance`, because its built-in default (early Monday) would override the global one.
 
+## Metaform consumers
+
+Repositories that receive metaform-components releases in `platform/` or metaform-workflows releases in `workflows/` extend `local>letsmod/renovate-config:metaform-consumer` instead of the default preset:
+
+- It is the default preset plus `ignorePaths` for `platform/**` and `workflows/**`. Each release replaces those folders (the metaform rollout, INFRA-822), so a Renovate update there would be reverted by the next one. Dependencies belong in the source repository; the dependency files at the consumer root stay covered.
+- `ignorePaths` replaces the list from Renovate's `:ignoreModulesAndTests` preset instead of adding to it, so the preset repeats those defaults (`node_modules`, `vendor`, test folders). A repository that sets its own `ignorePaths` must repeat them too.
+- metaform-workflows itself doesn't use it: its source package lives in `workflows/`.
+
 ## Private `@letsmod` npm packages
 
 The `@letsmod/*` packages (dcl-kit: `dcl-core`, `dcl-linter`, `dcl-runtime`, `dcl-transpiler`; `pimcore-link`) are published to GitHub Packages, which Renovate cannot read on its own.
