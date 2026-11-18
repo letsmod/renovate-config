@@ -13,5 +13,16 @@
     "**/__fixtures__/**",
     "platform/**",
     "workflows/**"
-  ]
+  ],
+  "nuget": {
+    "ignorePaths": [
+      "**/node_modules/**",
+      "**/bower_components/**",
+      "**/vendor/**",
+      "**/examples/**",
+      "**/__fixtures__/**",
+      "platform/**",
+      "workflows/**"
+    ]
+  }
 }
