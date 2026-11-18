@@ -11,6 +11,10 @@ Please see [official documentation](https://docs.renovatebot.com/config-presets/
   - Renovate rebases a PR only when it has a merge conflict, and only touches branches inside the schedule.
   - By default it rebases every open PR whenever the base branch moves, and each rebase re-runs the PR workflows: in agents that cost about 600 billed Actions minutes on 2026-10-02 alone (INFRA-578/579).
   - In repositories whose branch protection requires up-to-date branches, a Renovate PR may need one "Update branch" click before merging.
+- **Ignored paths:** `ignorePaths` lists only the folders that hold dependency files in our repositories. It replaces Renovate's built-in list (`:ignoreModulesAndTests`), whose other patterns match nothing here.
+  - `platform/**` and `workflows/**`: copies of metaform-components (3 domain repositories) and metaform-workflows (26 PATH repositories). Each release replaces them (INFRA-822), so an update there would be reverted by the next one. metaform-workflows, whose source lives in `workflows/`, sets `ignorePaths: []`.
+  - `**/vendor/**` (vendored SDKs in morpheus and seraph), `**/examples/**` (make-metaform-map) and `**/test/**`, `**/tests/**` (test requirements in agents, a test fixture in neb).
+  - A repository that sets its own `ignorePaths` replaces this list, so it must repeat the entries it still needs.
 - **Python minor versions:** an update to a new Python minor version (for example 3.14 → 3.15) waits under "Pending Approval" on the repository's Dependency Dashboard.
   - Tick its box there when the repository is ready, and Renovate opens the PR.
   - Patch updates (3.14.5 → 3.14.6) arrive as usual, in their own PR (`separateMinorPatch`). Without that split, Renovate would offer only the newest version as one minor update, and holding it would hold the patches too.
